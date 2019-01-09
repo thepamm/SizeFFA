@@ -7,13 +7,14 @@ namespace ThePammYT\SizeFFA;
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
+use pocketmine\math\Vector3;
+use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\enchantment\ProtectionEnchantment;
 use pocketmine\event\Listener;
 use pocketmine\utils\Config;
 use pocketmine\event\player\{PlayerInteractEvent, PlayerMoveEvent, PlayerRespawnEvent, PlayerDeathEvent, PlayerQuitEvent , PlayerItemHeldEvent};
-use pocketmine\math\Vector3;
 use pocketmine\level\Position;
 use pocketmine\level\Level;
 use pocketmine\item\Item;
@@ -72,6 +73,10 @@ class Main extends PluginBase implements Listener{
 					$this->ckit($player);
 					$player->sendTip("§l§dSize FFA§r\n\n\n");
 					$player->setGamemode(0);
+					//sound...
+
+					$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
+
 				return true;
 			case "sfexit":
 				$player = $sender;
@@ -81,6 +86,7 @@ class Main extends PluginBase implements Listener{
 				$player->setScale(1);
 				$player->getInventory()->clearAll();
 				$player->getArmorInventory()->clearAll();
+				$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
 				return true;
 			default:
 				return false;
@@ -100,7 +106,6 @@ class Main extends PluginBase implements Listener{
 
 	public function wDeath(PlayerDeathEvent $e){
 		$player = $e->getPlayer();
-		$rscale = $player->getScale();
 		if( isset($this->match[$player->getName()]) ){
 			$player->setScale(1);
 			$e->setDrops([]);
@@ -109,8 +114,9 @@ class Main extends PluginBase implements Listener{
 		if($causa instanceof EntityDamageByEntityEvent){
 			$attakr = $causa->getDamager();
 			if( isset($this->match[$attakr->getName()]) ){
-			$attakr->setScale( $attakr->getScale() + $rscale );
+			$attakr->setScale( $attakr->getScale() + 0.1 );
 			$attakr->addTitle("§c+1 Kill");
+			$this->getServer()->getLevelByName( $attakr->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($attakr->x,$attakr->y,$attakr->z), LevelSoundEventPacket::SOUND_NOTE);
 			}
 		}
 	}
