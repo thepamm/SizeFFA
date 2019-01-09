@@ -1,0 +1,29 @@
+name: SizeFFA
+main: ThePammYT\SizeFFA\Main
+version: 0.0.1
+api: [ 1.0.0 , 2.0.0 , 3.0.0 ]
+load: POSTWORLD
+author: ThePammYT
+description: SizeFFA
+website: https://fuzzyleap.ml
+
+commands:
+ sffa:
+  description: "SizeFFA"
+  usage: "/sffa option"
+  permission: sizeffa.op.command
+ joinsffa:
+  description: "SizeFFA"
+  usage: "/joinsffa"
+ sfexit:
+  description: "Salir de SizeFFA"
+  usage: "/sfexit"
+
+permissions:
+ skeleton:
+  default: true
+  description: "Example root permission node"
+  children:
+   sizeffa.op.command:
+    default: true
+    description: "Allows the use of /sizeffa"
