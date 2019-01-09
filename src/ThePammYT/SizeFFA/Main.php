@@ -100,6 +100,7 @@ class Main extends PluginBase implements Listener{
 
 	public function wDeath(PlayerDeathEvent $e){
 		$player = $e->getPlayer();
+		$rscale = $player->getScale();
 		if( isset($this->match[$player->getName()]) ){
 			$player->setScale(1);
 			$e->setDrops([]);
@@ -108,7 +109,7 @@ class Main extends PluginBase implements Listener{
 		if($causa instanceof EntityDamageByEntityEvent){
 			$attakr = $causa->getDamager();
 			if( isset($this->match[$attakr->getName()]) ){
-			$attakr->setScale( $attakr->getScale() + 0.1 );
+			$attakr->setScale( $attakr->getScale() + $rscale );
 			$attakr->addTitle("§c+1 Kill");
 			}
 		}
