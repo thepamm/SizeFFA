@@ -80,6 +80,7 @@ class Main extends PluginBase implements Listener{
 				return true;
 			case "sfexit":
 				$player = $sender;
+				if( isset( $this->match[$player->getName()] ) ){
 				$player->sendMessage("§bha salido de SizeFFA");
 				$player->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
 				unset( $this->match[$player->getName()] );
@@ -87,6 +88,10 @@ class Main extends PluginBase implements Listener{
 				$player->getInventory()->clearAll();
 				$player->getArmorInventory()->clearAll();
 				$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
+				
+				}else {
+				$player->sendMessage("§cNo estas dentro.");
+				}
 				return true;
 			default:
 				return false;
