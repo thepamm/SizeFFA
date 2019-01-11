@@ -36,7 +36,7 @@ class Main extends PluginBase implements Listener{
 		switch($command->getName()){
 			case "sffa":
 				if( !isset($args[0]) ){
-					$sender->sendMessage("§cUtilize /sffa { create , menu , help }");
+					$sender->sendMessage("§cUtilize /sffa { create , help , join , exit }");
 					return false;
 				}
 				if( strtolower($args[0]) == "create" ){
@@ -51,26 +51,27 @@ class Main extends PluginBase implements Listener{
 						$sender->sendMessage("§aArena Creada Correctamente!");
 						return true;
 					}else{
-						$sender->sendMessage("§cNo Tienes permiso para usar este comando.");
+						$sender->sendMessage("§cyou do not have permission to use this command.");
 						return true;
 					}
 
 				}
 				if( strtolower($args[0]) == "help" ){
 					$sender->sendMessage("§aHelp List 1/1");
-					$sender->sendMessage("§a> /sffa {create / help } ► Crear Spawn SizeFFA");
-					$sender->sendMessage("§a> /joinsffa ► entrar al SizeFFA");
-					$sender->sendMessage("§a> /sfexit ► Salir Del SizeFFA");
+					$sender->sendMessage("§a> /sffa create | Create SizeFFA Spawn");
+					$sender->sendMessage("§a> /sffa help   | SizeFFA Help");
+					$sender->sendMessage("§a> /sffa join   | Join to SizeFFA");
+					$sender->sendMessage("§a> /sffa create | Exit SizeFFA");
 
 				}
 				if( strtolower($arg[0]) == "join" ){
 					$player = $sender;
-					$player->sendMessage("§b/sfexit en caso de que quiera salir de SizeFFA");
+					$player->sendMessage("§b/sffa exit |> exit SizeFFA");
 					$this->match[$player->getName()] = true;
 					$dat = new Config($this->getDataFolder()."config.yml", Config::YAML);
 					$player->teleport(new Position($dat->get("x"), $dat->get("y"), $dat->get("z"), $this->getServer()->getLevelByName($dat->get("world"))));
 					$this->ckit($player);
-					$player->sendTip("§l§dSize FFA§r\n\n\n");
+					$player->sendTip("§l§aSize FFA§r\n\n\n");
 					$player->setGamemode(0);
 					//sound...
 
@@ -80,7 +81,7 @@ class Main extends PluginBase implements Listener{
 				if( strtolower($args[0]) == "exit" ){
 					$player = $sender;
 					if( isset( $this->match[$player->getName()] ) ){
-					$player->sendMessage("§bha salido de SizeFFA");
+					$player->sendMessage("§bhas left SizeFFA");
 					$player->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
 					unset( $this->match[$player->getName()] );
 					$player->setScale(1);
@@ -89,7 +90,7 @@ class Main extends PluginBase implements Listener{
 					$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
 
 					}else {
-					$player->sendMessage("§cNo estas dentro de SizeFFA.");
+					$player->sendMessage("§cNoyou are not in SizeFFA.");
 					}
 				}
 				return true;
