@@ -11,7 +11,7 @@ commands:
  sffa:
   description: "SizeFFA"
   usage: "/sffa option"
-  permission: sizeffa.op.command
+  permission: sizeffa.command.op
 
 permissions:
  sizeffa.command:
