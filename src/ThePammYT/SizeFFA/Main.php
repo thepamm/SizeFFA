@@ -40,7 +40,7 @@ class Main extends PluginBase implements Listener{
 					return false;
 				}
 				if( strtolower($args[0]) == "create" ){
-					if( $sender->hasPermission("sizeffa.op.command") ){
+					if( $sender->hasPermission("sizeffa.command.op") ){
 						@mkdir($this->getDataFolder());
 						$this->dat = new Config($this->getDataFolder()."config.yml", Config::YAML);
 						$this->dat->set("world", $sender->getLevel()->getName());
