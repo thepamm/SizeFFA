@@ -14,10 +14,10 @@ commands:
   permission: sizeffa.op.command
 
 permissions:
- skeleton:
-  default: true
+ sizeffa.command:
+  default: op
   description: "Example root permission node"
   children:
-   sizeffa.op.command:
-    default: true
+   sizeffa.command.op:
+    default: op
     description: "Allows the use of /sizeffa"
