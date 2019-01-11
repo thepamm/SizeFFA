@@ -12,12 +12,6 @@ commands:
   description: "SizeFFA"
   usage: "/sffa option"
   permission: sizeffa.op.command
- joinsffa:
-  description: "SizeFFA"
-  usage: "/joinsffa"
- sfexit:
-  description: "Salir de SizeFFA"
-  usage: "/sfexit"
 
 permissions:
  skeleton:
