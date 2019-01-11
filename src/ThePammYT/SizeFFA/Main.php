@@ -63,8 +63,7 @@ class Main extends PluginBase implements Listener{
 					$sender->sendMessage("§a> /sfexit ► Salir Del SizeFFA");
 
 				}
-				return true;
-			case "joinsffa":
+				if( strtolower($arg[0]) == "join" ){
 					$player = $sender;
 					$player->sendMessage("§b/sfexit en caso de que quiera salir de SizeFFA");
 					$this->match[$player->getName()] = true;
@@ -77,20 +76,21 @@ class Main extends PluginBase implements Listener{
 
 					$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
 
-				return true;
-			case "sfexit":
-				$player = $sender;
-				if( isset( $this->match[$player->getName()] ) ){
-				$player->sendMessage("§bha salido de SizeFFA");
-				$player->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
-				unset( $this->match[$player->getName()] );
-				$player->setScale(1);
-				$player->getInventory()->clearAll();
-				$player->getArmorInventory()->clearAll();
-				$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
-				
-				}else {
-				$player->sendMessage("§cNo estas dentro.");
+				}
+				if( strtolower($args[0]) == "exit" ){
+					$player = $sender;
+					if( isset( $this->match[$player->getName()] ) ){
+					$player->sendMessage("§bha salido de SizeFFA");
+					$player->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
+					unset( $this->match[$player->getName()] );
+					$player->setScale(1);
+					$player->getInventory()->clearAll();
+					$player->getArmorInventory()->clearAll();
+					$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
+
+					}else {
+					$player->sendMessage("§cNo estas dentro de SizeFFA.");
+					}
 				}
 				return true;
 			default:
