@@ -64,7 +64,7 @@ class Main extends PluginBase implements Listener{
 					$sender->sendMessage("§a> /sffa create | Exit SizeFFA");
 
 				}
-				if( strtolower($arg[0]) == "join" ){
+				if( strtolower($args[0]) == "join" ){
 					$player = $sender;
 					$player->sendMessage("§b/sffa exit |> exit SizeFFA");
 					$this->match[$player->getName()] = true;
