@@ -87,7 +87,6 @@ class Main extends PluginBase implements Listener{
 					$player->setScale(1);
 					$player->getInventory()->clearAll();
 					$player->getArmorInventory()->clearAll();
-					$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
 
 					}else {
 					$player->sendMessage("§cNoyou are not in SizeFFA.");
