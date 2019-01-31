@@ -66,17 +66,22 @@ class Main extends PluginBase implements Listener{
 				}
 				if( strtolower($args[0]) == "join" ){
 					$player = $sender;
-					$player->sendMessage("§b/sffa exit |> exit SizeFFA");
-					$this->match[$player->getName()] = true;
+					
 					$dat = new Config($this->getDataFolder()."config.yml", Config::YAML);
-					$player->teleport(new Position($dat->get("x"), $dat->get("y"), $dat->get("z"), $this->getServer()->getLevelByName($dat->get("world"))));
-					$this->ckit($player);
-					$player->sendTip("§l§aSize FFA§r\n\n\n");
-					$player->setGamemode(0);
+					if( isset( $dat->get("x") ) ){
+						$this->match[$player->getName()] = true;
+						$player->sendMessage("§b/sffa exit |> exit SizeFFA");
+						$player->teleport(new Position($dat->get("x"), $dat->get("y"), $dat->get("z"), $this->getServer()->getLevelByName($dat->get("world"))));
+						$this->ckit($player);
+						$player->sendTip("§l§aSize FFA§r\n\n\n");
+						$player->setGamemode(0);
+					}else{
+						$player->sendMessage("§bSFFA has not been created, use /sffa create");
+					}
+					
 					//sound...
 
-					$this->getServer()->getLevelByName( $player->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($player->x,$player->y,$player->z), LevelSoundEventPacket::SOUND_PORTAL);
-
+					
 				}
 				if( strtolower($args[0]) == "exit" ){
 					$player = $sender;
@@ -89,7 +94,7 @@ class Main extends PluginBase implements Listener{
 					$player->getArmorInventory()->clearAll();
 
 					}else {
-					$player->sendMessage("§cNoyou are not in SizeFFA.");
+					$player->sendMessage("§cyou are not in SizeFFA.");
 					}
 				}
 				return true;
