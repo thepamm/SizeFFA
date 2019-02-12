@@ -68,7 +68,7 @@ class Main extends PluginBase implements Listener{
 					$player = $sender;
 					
 					$dat = new Config($this->getDataFolder()."config.yml", Config::YAML);
-					if( !== isset( $dat->get("x") ) ){
+					if( $dat->get("x") !! null ){
 						$this->match[$player->getName()] = true;
 						$player->sendMessage("§b/sffa exit |> exit SizeFFA");
 						$player->teleport(new Position($dat->get("x"), $dat->get("y"), $dat->get("z"), $this->getServer()->getLevelByName($dat->get("world"))));
