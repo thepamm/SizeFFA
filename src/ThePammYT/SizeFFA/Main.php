@@ -68,15 +68,15 @@ class Main extends PluginBase implements Listener{
 					$player = $sender;
 					
 					$dat = new Config($this->getDataFolder()."config.yml", Config::YAML);
-					if( $dat->get("x") !! null ){
+					if( $dat->get("x") == null ){
+						$player->sendMessage("§bSFFA has not been created, use /sffa create");
+					}else{
 						$this->match[$player->getName()] = true;
 						$player->sendMessage("§b/sffa exit |> exit SizeFFA");
 						$player->teleport(new Position($dat->get("x"), $dat->get("y"), $dat->get("z"), $this->getServer()->getLevelByName($dat->get("world"))));
 						$this->ckit($player);
 						$player->sendTip("§l§aSize FFA§r\n\n\n");
 						$player->setGamemode(0);
-					}else{
-						$player->sendMessage("§bSFFA has not been created, use /sffa create");
 					}
 					
 					//sound...
