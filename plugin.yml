@@ -1,7 +1,7 @@
 name: SizeFFA
 main: ThePammYT\SizeFFA\Main
 version: 0.0.1
-api: [ 3.0.0 , 3.6.1 ]
+api: [ 3.0.0 ]
 load: POSTWORLD
 author: ThePammYT
 description: SizeFFA
