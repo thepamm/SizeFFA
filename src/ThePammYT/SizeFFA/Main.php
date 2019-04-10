@@ -28,7 +28,6 @@ class Main extends PluginBase implements Listener{
 		public $match = [];
 
 	public function onEnable() : void{
-		$this->getLogger()->info("Plugin activado");
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
@@ -141,7 +140,7 @@ class Main extends PluginBase implements Listener{
 	}
 
 	public function onDisable() : void{
-		$this->getLogger()->info("Plugin Desactivado");
+		
 	}
 
 	public function ckit(Player $player){
