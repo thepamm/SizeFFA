@@ -35,7 +35,7 @@ class Main extends PluginBase implements Listener{
 		switch($command->getName()){
 			case "sffa":
 				if( !isset($args[0]) ){
-					$sender->sendMessage("§cUtilize /sffa { create , help , join , exit }");
+					$sender->sendMessage("§cUse /sffa { create , help , join , exit }");
 					return false;
 				}
 				if( strtolower($args[0]) == "create" ){
@@ -47,7 +47,7 @@ class Main extends PluginBase implements Listener{
 						$this->dat->set("y", $sender->y);
 						$this->dat->set("z", $sender->z);
 						$this->dat->save();
-						$sender->sendMessage("§aArena Creada Correctamente!");
+						$sender->sendMessage("§aArena created successfully!");
 						return true;
 					}else{
 						$sender->sendMessage("§cyou do not have permission to use this command.");
