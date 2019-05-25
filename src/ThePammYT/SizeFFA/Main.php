@@ -42,7 +42,7 @@ class Main extends PluginBase implements Listener{
 					if( $sender->hasPermission("sizeffa.command.op") ){
 						@mkdir($this->getDataFolder());
 						$this->dat = new Config($this->getDataFolder()."config.yml", Config::YAML);
-						$this->dat->set("world", $sender->getLevel()->getName());
+						$this->dat->set("world", $sender->getLevel()->getFolderName());
 						$this->dat->set("x", $sender->x);
 						$this->dat->set("y", $sender->y);
 						$this->dat->set("z", $sender->z);
@@ -125,7 +125,7 @@ class Main extends PluginBase implements Listener{
 			if( isset($this->match[$attakr->getName()]) ){
 			$attakr->setScale( $attakr->getScale() + 0.1 );
 			$attakr->addTitle("§c+1 Kill");
-			$this->getServer()->getLevelByName( $attakr->getLevel()->getName() )->broadcastLevelSoundEvent(new Vector3($attakr->x,$attakr->y,$attakr->z), LevelSoundEventPacket::SOUND_NOTE);
+			$this->getServer()->getLevelByName( $attakr->getLevel()->getFolderName() )->broadcastLevelSoundEvent(new Vector3($attakr->x,$attakr->y,$attakr->z), LevelSoundEventPacket::SOUND_NOTE);
 			}
 		}
 	}
